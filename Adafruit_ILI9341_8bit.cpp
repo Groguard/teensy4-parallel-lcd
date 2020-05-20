@@ -32,10 +32,10 @@ void write8special(uint8_t d) {
   _data_pins[6] = 17;
   _data_pins[7] = 16;
   digitalWriteFast(TFT_WR, LOW);
-  *((volatile uint16_t *)(GPIO6_DR) + 1) = d;
-//  for (int i = 0; i < 8; ++i) {
-//    digitalWriteFast(_data_pins[i], (d >> i) & 0x01);
-//  }
+  //*((volatile uint16_t *)(GPIO6_DR) + 1) = d;
+  for (int i = 0; i < 8; ++i) {
+    digitalWriteFast(_data_pins[i], (d >> i) & 0x01);
+  }
   
   digitalWriteFast(TFT_WR, HIGH);
   // NOPs needed here because changes on 8 bit bus are usually to quick for driver to respond
